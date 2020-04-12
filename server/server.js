@@ -13,6 +13,16 @@ var io = socketIO(server);
 io.on('connection', (socket) => {
     console.log('Client connected')
 
+    socket.emit('newEmail', {
+        from: "mike@example.com",
+        text: "Hey buddy, what's going on...!!",
+        createdAt: new Date()
+    });
+
+    socket.on('createEmail', (newEmail) => {
+        console.log('new email ', newEmail)
+    })
+
     socket.on('disconnect', () => {
         console.log('User was disconnected')
     })
